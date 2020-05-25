@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Webstart TCHAT</title>
+</head>
+<style>
+    body{
+        margin: 0;
+        font-family: 'monospace', sans-serif;
+        background-color: #f9f9f8;
+        height: 100vh;
+        }
+    header{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: cornflowerblue;
+    }
+    header h1{
+        color: white;
+    }
+    section{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 80vh;
+    }
+
+    hr{
+        width: 100%;
+        margin: 0;
+    }
+
+    section form{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background-color: white;
+        padding: 10px 20px;
+    }
+    section form label,
+    section form input{
+        width: 100%;
+        font-size: 1.5rem ;
+        outline: none;
+        margin: 10px 0 5px;
+        border: none;
+    }
+    section form span{
+        font-size: 0.8rem;
+        margin: 10px 0;
+    }
+    button{
+        width: 100%;
+        border: none;
+        color: white;
+        font-size: 1.2rem;
+        font-weight: bold;
+        padding: 10px 0;
+        cursor: pointer;
+        background-color: cornflowerblue;
+    }
+</style>
+<body>
+    <header>
+        <h1>
+            WebstartChat
+        </h1>
+    </header>
+    <section>
+        <form id="form" name="form">
+            <label for="username">
+                <input id="username" name="username" placeholder="Enter your USERNAME" type="text">
+            </label>
+            <hr />
+            <label for="email">
+                <input id="email" name="email" placeholder="Enter your Email" type="email">
+            </label>
+            <hr />
+            <label for="password">
+                <input id="password" name="password" placeholder="Enter your password" type="password">
+            </label>
+            <hr />
+            <span>Your password must be between 4 and 12 character and with at least one uppercase letter</span>
+            <button id="button" type="button"> SUBMIT </button>
+        </form>
+    </section>
+</body>
+<script rel="script" type="text/javascript">
+    document.querySelector('#button').addEventListener('click', function () {
+
+      console.log( document.querySelector('#username').value)
+      let form = new FormData()
+
+      form.append('username', document.querySelector('#username').value)
+      form.append('email', document.querySelector('#email').value)
+      form.append('password', document.querySelector('#password').value)
+
+      fetch('/auth/signup',{
+              method: "POST",
+              body: form
+            })
+            .then((res) => res.json())
+            .then((response) => {
+              console.log(response)
+            })
+    })
+</script>
+</html>
