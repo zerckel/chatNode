@@ -95,11 +95,7 @@
     document.querySelector('#button').addEventListener('click', function () {
 
       console.log( document.querySelector('#username').value)
-      let form = new FormData()
-
-      form.append('username', document.querySelector('#username').value)
-      form.append('email', document.querySelector('#email').value)
-      form.append('password', document.querySelector('#password').value)
+      let form = new FormData(document.getElementById('form'))
 
       fetch('/auth/signup',{
               method: "POST",
